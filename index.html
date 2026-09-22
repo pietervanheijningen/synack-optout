@@ -1,102 +1,300 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LACeS Anycast Census — Opt-Out</title>
+    <title>TCP SYN-ACK Hitlist — Opt-Out</title>
     <meta name="robots" content="noindex, nofollow">
     <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--bg);
+            scroll-padding-top: 2rem;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 720px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            line-height: 1.6;
-            color: #e6edf3;
-            background: #0d1117;
+            margin: 0;
+            color: var(--text);
+            font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
-        h1 { color: #58a6ff; margin-bottom: 0.25rem; }
-        h2 { color: #c9d1d9; margin-top: 2rem; }
-        a { color: #58a6ff; }
+
+        .shell {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 64px 28px;
+        }
+
+        h1, h2 {
+            color: var(--heading);
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin: 0 0 12px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin: 0 0 18px;
+            letter-spacing: -.015em;
+        }
+
+        header > p {
+            color: var(--muted);
+            margin: 0;
+        }
+
+        p {
+            margin: 0 0 16px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: var(--accent);
+            text-underline-offset: 4px;
+            overflow-wrap: anywhere;
+        }
+
+        a:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 5px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 26px;
+            margin-top: 28px;
+        }
+
+        nav a {
+            font-size: .875rem;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            margin-top: 40px;
+        }
+
+        section {
+            scroll-margin-top: 24px;
+        }
+
         code {
-            background: #161b22;
-            padding: 0.15em 0.4em;
-            border-radius: 4px;
-            font-size: 0.92em;
+            color: var(--accent);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-size: .9em;
         }
-        ul { padding-left: 1.5rem; }
-        li { margin-bottom: 0.4rem; }
+
+        ul {
+            padding-left: 22px;
+            margin: 0 0 18px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: var(--accent);
+        }
+
+        strong {
+            color: var(--heading);
+        }
+
         .contact {
-            margin-top: 2rem;
-            padding: 1rem;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            background: #161b22;
+            background: var(--surface);
+            §: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 600px) {
+            .shell {
+                padding: 36px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .contact {
+                padding: 18px;
+            }
+        }
+
+        :root {
+            --bg: #0e141b;
+            --surface: #192430;
+            --text: #c5d0dc;
+            --heading: #eef5fc;
+            --muted: #99aec3;
+            --accent: #88c9ed;
+            --border: #2b3c4d;
+        }
+
+        .shell {
+            max-width: 900px;
+        }
+
+        header {
+            padding: 0 8px;
+        }
+
+        nav a:last-child {
+            color: var(--heading);
+        }
+
+        main {
+            display: grid;
+            gap: 20px;
+        }
+
+        section {
+            background: #141e28;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 32px;
+            box-shadow: 0 6px 20px #00000018;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::before {
+            content: '';
+            width: 6px;
+            height: 20px;
+            border-radius: 3px;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        #opt-out {
+            border-color: #527b97;
+        }
+
+        .contact {
+            box-shadow: none;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 22px 20px;
+                border-radius: 10px;
+            }
+
+            header {
+                padding: 0;
+            }
+
+            .shell {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="shell">
+    <header>
 
-<h1>LACeS Anycast Census</h1>
-<p>Opt-out information for network operators</p>
+        <h1>TCP SYN-ACK Hitlist</h1>
+        <p>Opt-out information for network operators</p>
+    </header>
+    <main>
+        <section id="traffic" aria-labelledby="traffic-title">
+            <h2 id="traffic-title">What is this traffic?</h2>
+            <p>
+                You are seeing probe packets originating from the TCP SYN-ACK Hitlist project.
+                We conduct repeated measurements of the routable IPv4 address space to identify responsive
+                addresses. The goal is to construct an Internet-wide IPv4 hitlist: a set of reliably
+                responsive addresses that can serve as representatives for /24 blocks in Internet measurement studies.
+            </p>
+            <p>
+                All measurements for this project will originate from <code>192.87.173.77</code>
+            </p>
 
-<h2>What is this traffic?</h2>
-<p>
-    You are seeing probe packets originating from the
-    <strong><a href="https://manycast.net/">LACeS</a></strong> (Longitudinal Anycast Census System) project.
-    LACeS performs a daily census of IPv4 and IPv6 anycast deployments across the Internet.
-    The goal is to provide an open, publicly available dataset of anycast prefixes for network
-    operators and the research community.
-</p>
+        </section>
+        <section id="probes" aria-labelledby="probes-title"><h2 id="probes-title">What do we send?</h2>
+            <p>Our probes consist of:</p>
+            <ul>
+                <li><strong>TCP SYN-ACK packets:</strong> one probe per destination IPv4 address in each full scan.</li>
+                <li><strong>ICMP echo requests:</strong> may also be sent to compare responsiveness and coverage with
+                    TCP SYN-ACK probing.
+                </li>
+            </ul>
+            <p>
+                The TCP SYN-ACK packets are not part of an existing TCP connection. Since the target has no
+                corresponding
+                connection state, its TCP stack is expected to respond with an RST packet. We use this response
+                as an indication of reachability, without enumerating open ports or establishing a TCP connection.
+            </p>
+            <p>
+                One full scan of the routable IPv4 address space takes approximately one week and will be
+                repeated about every month. Probing is spread over this period to keep the traffic volume
+                and operational impact low.
+            </p>
 
-<h2>What do we send?</h2>
-<p>Our probes consist of:</p>
-<ul>
-    <li><strong>ICMP echo requests</strong> (ping) — one per /24 (IPv4) or /48 (IPv6) prefix.</li>
-    <li><strong>TCP SYN/ACK packets</strong> — to a single address per prefix on a non-standard high port.</li>
-    <li><strong>DNS queries</strong> — to known public DNS nameservers only.</li>
-</ul>
-<p>
-    Each target address receives at most a few packets per day. The traffic volume is minimal
-    and should not impact your network operations.
-</p>
+        </section>
+        <section id="research" aria-labelledby="research-title"><h2 id="research-title">Why are we doing this?</h2>
+            <p>
+                The TCP SYN-ACK Hitlist is a research project run by the <a href="https://www.utwente.nl/en/eemcs/dacs/"
+                                                                        target="_blank">Design and Analysis of
+                Communication Systems (DACS)</a>
+                group at the <strong>University of Twente</strong>, the Netherlands, as part of Pieter van Heijningen's
+                master's thesis in Computer Science.<br><br>
+                Internet-wide measurements commonly rely on ICMP echo requests, but these may be blocked by firewalls or
+                other middleboxes.
+                We investigate whether TCP SYN-ACK probing can improve measurement coverage and use repeated
+                measurements to select more reliable representatives. The resulting hitlist can support research
+                on Internet reachability, outage detection, geolocation, and routing.
+            </p>
 
-<h2>Why are we doing this?</h2>
-<p>
-    LACeS is a research project run by the <a href="https://www.utwente.nl/en/eemcs/dacs/" target="_blank">Design and Analysis of Communication Systems (DACS)</a>
-    group at the <strong>University of Twente</strong>, the Netherlands. The census data
-    helps operators understand their own anycast deployments and supports Internet measurement research.
-    Results are published at <a href="https://manycast.net/">manycast.net</a> and the
-    underlying dataset is freely available.
-</p>
-<p>
-    The methodology is described in:<br>
-    Hendriks, Luckie, Jonker, Sommese, van Rijswijk-Deij.
-    <em>LACeS: An Open, Fast, Responsible and Efficient Longitudinal Anycast Census System.</em>
-    ACM Internet Measurement Conference (IMC), 2025.
-</p>
+        </section>
+        <section id="opt-out" aria-labelledby="opt-out-title"><h2 id="opt-out-title">How to opt out</h2>
+            <p>
+                If you would like your prefix(es) excluded from future TCP SYN-ACK Hitlist probing, please send an
+                email to the address below with the prefix(es) you want excluded.<br><br>
+                We will add them to our do-not-probe list, and they will be excluded from subsequent measurements.
+            </p>
 
-<h2>Measurement infrastructure</h2>
-<ul>
-    <li><strong><a href="https://tangled.dacs.utwente.nl/" target="_blank">TANGLED Anycast Testbed</a></strong> — 32 globally distributed nodes used for anycast-based (AB) detection.</li>
-    <li><strong><a href="https://www.caida.org/projects/ark/" target="_blank">CAIDA Archipelago (Ark)</a></strong> — vantage points used for latency-based (GCD) geolocation.</li>
-</ul>
+            <div class="contact">
+                <strong>Contact:</strong><br>
+                Pieter van Heijningen<br>
+                University of Twente — DACS<br>
+                <a href="mailto:p.s.h.vanheijningen@student.utwente.nl">p.s.h.vanheijningen@student.utwente.nl</a><br>
+            </div>
 
-<h2>How to opt out</h2>
-<p>
-    If you would like your prefix(es) excluded from future LACeS probing, please send an
-    email to the address below with the prefix(es) you want excluded. We will add them to
-    our exclusion list and they will be removed from subsequent census runs.
-</p>
-
-<div class="contact">
-    <strong>Contact:</strong><br>
-    Remi Hendriks<br>
-    University of Twente — DACS<br>
-    <a href="mailto:remi.hendriks@utwente.nl">remi.hendriks@utwente.nl</a><br>
-    <a href="https://manycast.net/">https://manycast.net/</a>
+        </section>
+    </main>
 </div>
-
 </body>
 </html>
