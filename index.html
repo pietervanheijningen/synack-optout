@@ -267,7 +267,7 @@
         <section id="probes" aria-labelledby="probes-title"><h2 id="probes-title">What do we send?</h2>
             <p>Our probes consist of:</p>
             <ul>
-                <li><strong>TCP SYN-ACK packets:</strong> one probe per destination IPv4 address in each full scan.</li>
+                <li><strong>TCP SYN-ACK packets:</strong> 2 probes per destination IPv4 address in each full scan.</li>
                 <li><strong>ICMP echo requests:</strong> will also be sent to compare responsiveness and coverage with
                     TCP SYN-ACK probing.
                 </li>
@@ -287,7 +287,7 @@
         <section id="port-scan" aria-labelledby="port-scan-title">
             <h2 id="port-scan-title">This is not port scanning</h2>
             <p>
-                Each probe is a single TCP SYN-ACK packet with a random SEQ/ACK number, sent without a
+                Each probe is a TCP SYN-ACK packet with a random SEQ/ACK number, sent without a
                 preceding SYN.<br><br>
                 Since the target's TCP stack has no connection state expecting this sequence number, it usually
                 replies with an RST. Crucially this does not reveal anything about any servies with may be running on any ports.
